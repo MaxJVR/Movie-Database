@@ -1,0 +1,18 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+      <h3 class="panel-title"><%= movie.Title %></h3>
+  </div>
+  <div class="panel-body">
+    <h4>Plot: <%= movie.Plot %></h4>
+    <h4>Rating:</h4> <% var star = "<span class='glyphicon glyphicon-star star'></span>" %>
+    <% for (var i = 0; i < rating; i++) { %>
+      <span'<%- star %>'></span>
+    <%  }; %>
+    <h4>Director: <%= movie.Director %></h4>
+    <h4>Rated: <%= movie.Rated %></h4>
+    <h4>Runtime: <%= movie.Runtime %></h4></h4>
+    <h4>Awards: <%= movie.Awards %></h4></h4>
+    <h4>Rating: <%= movie.tomatoRating %></h4>
+  </div>
+  <a class="btn btn-primary" href="/">Back</a>
+  </div>
