@@ -4,15 +4,26 @@
   </div>
   <div class="panel-body">
     <h4>Plot: <%= movie.Plot %></h4>
-    <h4>Rating:</h4> <% var star = "<span class='glyphicon glyphicon-star star'></span>" %>
-    <% for (var i = 0; i < rating; i++) { %>
-      <span'<%- star %>'></span>
-    <%  }; %>
     <h4>Director: <%= movie.Director %></h4>
     <h4>Rated: <%= movie.Rated %></h4>
     <h4>Runtime: <%= movie.Runtime %></h4></h4>
     <h4>Awards: <%= movie.Awards %></h4></h4>
     <h4>Rating: <%= movie.tomatoRating %></h4>
   </div>
+  <% if(favorite){ %>
+    <b>This movie is in your favorites.</b>
+  <% } else { %>
+    <form method="post" action="/favorites">
+      <input type="hidden" name="title" value="<%= movie.Title %>">
+      <input type="hidden" name="year" value="<%= movie.Year %>">
+      <input type="hidden" name="poster" value="<%= movie.Poster %>">
+      <input type="hidden" name="imdbId" value="<%= movie.imdbID %>">
+      <input type="submit" class="btn btn-primary" value="Favorite">
+    </form>
+  <% } %>
   <a class="btn btn-primary" href="/">Back</a>
-  </div>
+</div>
+
+
+
+<!-- <pre><%= JSON.stringify(movie,null,4) %></pre> -->
