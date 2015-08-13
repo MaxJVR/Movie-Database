@@ -1,14 +1,16 @@
-<h1><%= favorite.title %> - Comments</h1>
-
-<% favorite.comments.forEach(function(comment){ %>
-<div class="well">
-  <% comment.body %>
-  <em><% comment.createdAt %></em>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+      <h3 class="panel-title"><%= favorite.title %> - Comments</h3>
+  </div>
+ <div class="panel-body">
+  <% favorite.comments.forEach(function(comment){ %>
+    <h6><% comment.body %></h6>
+    <em><% comment.createdAt %></em>
+    <% }) %>
+  <form method="post" action="/favorites/<%= favorite.id %>/comments" class="form">
+    <div class="form-group">
+      <textarea name="body" class="form-control"></textarea>
+      <input type="submit" class="btn btn-primary" value="Comment">
+    </div>
+  </form>
 </div>
-<% }) %>
-<form method="post" action="/favorites/<%= favorite.id %>/comments" class="form">
-<div class="form-group">
-  <textarea name="body" class="form-control"></textarea>
-  <input type="submit" class="btn btn-primary" value="Comment">
-</div>
-</form>

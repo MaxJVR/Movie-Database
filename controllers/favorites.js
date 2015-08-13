@@ -4,9 +4,10 @@ var db = require('../models');
 // GET http://localhost:3000/favorites
 router.get('/',function(req,res){
   db.favorite.findAll({
-    include:[db.comment]
+    include:[db.comment, db.tag]
   }).then(function(favorites){
-    res.render('favorites/index',{favorites:favorites});
+    res.render('favorites/index',{
+      favorites:favorites});
   });
 });
 
@@ -54,5 +55,34 @@ router.post('/:id/comments',function(req,res){
   // res.send({params:req.params,body:req.body});
 });
 
+// GET tags at http://localhost:3000/:id/tags
+router.get('/:id/tags/new', function  (req,res) {
+  res.render('tags/new', {favoriteId: req.params.id});
+  // res.send("This is the tags page!")
+});
+
+// POST tags at http://localhost:3000/favorites/:id/tags
+router.post('/:id/tags', function  (req,res) {
+  var tagName = req.body.tagName;
+  var favoriteId = req.params.id;
+
+  db.favorite.findById(favoriteId).then(function(favorite) {
+    db.tag.findOrCreate({where: {tag: tagName}}).spread(function(tag, created) {
+      favorite.addTag(tag).then(function(tag) {
+        res.redirect('/favorites');
+      })
+    });
+  });
+  // res.send('you created a tag!')
+});
+
+router.get('/tags',function(req,res){
+  db.tag.findAll({
+  }).then(function(tags){
+    res.render('tags/index',{tags:tags
+    });
+  });
+  // res.send("These are my tags!");
+});
 
 module.exports = router;

@@ -1,0 +1,14 @@
+<div class="col-xs-offset-4 col-xs-4 col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form method="POST" action="/favorites/<%= favoriteId %>/tags" role="form">
+        <div class="form-group">
+          <label for="">Add a new tag!</label>
+          <input name="tagName" type="text" class="form-control" id="tagName" placeholder="#hashtag">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+

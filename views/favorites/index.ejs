@@ -1,15 +1,47 @@
-<h1>Favorites</h1>
-
-<% favorites.forEach(function(movie) { %>
-<div class="well">
-  <img src="<%= movie.poster %>" height="70" class="pull-right">
-  <h2><a href="/movies/<%= movie.imdbId %>"><%= movie.title %> (<%= movie.year %>)</a></h2>
-  <a href="/favorites/<%= movie.id %>/comments" class="btn btn-primary">
-    Comments (<%= movie.comments.length %>)
-  </a>
-  <form method="post" action="/favorites/<%= movie.id %>?_method=delete">
-  <button type="submit" class="btn btn-danger glyphicon glyphicon-trash"></button>
-  </form>
+<div class="row">
+  <div class=" col-xs-4  col-sm-4  col-md-4  col-lg-offset-4 col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-body text-center">
+        <h1>Favorite Movies</h1>
+      </div>
+    </div>
+  </div>
 </div>
-<% }); %>
+<div class="row">
+  <% favorites.forEach(function(movie) { %>
+  <div class=" col-xs-4  col-sm-4  col-md-4  col-lg-4">
+    <div class="panel panel-default favoritesList">
+        <h3><a href="/movies/<%= movie.imdbId %>"><%= movie.title %> (<%= movie.year %>)</a></h3>
+        <form method="post" action="/favorites/<%= movie.id %>?_method=delete" class="pull-right">
+          <button type="submit" class="btn btn-danger glyphicon glyphicon-trash"></button>
+        </form>
+      <div class="panel-body">
+        <div><img src="<%= movie.poster %>" height="200" class=""></div><br>
+        <div>
+          <a class="btn btn-primary glyphicon glyphicon-tags" href="/favorites/<%= movie.id %>/tags/new"></a>
+          <% movie.tags.forEach(function(tag){ %>
+            <a class="btn btn-primary"><span class"glyphicon glyphicon-tag"></span><p>#<%= tag.tag %></p></a>
+          <% }); %>
+        </div>
+        <br>
+        <div>
+          <a href="/favorites/<%= movie.id %>/comments" class="btn btn-primary glyphicon glyphicon-comment">
+            (<%= movie.comments.length %>)
+          </a>
+        </div>
+        <br>
+        <div>
+          <ul>
+          <% movie.comments.forEach(function(comment){ %>
+            <li>
+              <%= comment.body %>
+            </li>
+          <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }); %>
+</div>
 
